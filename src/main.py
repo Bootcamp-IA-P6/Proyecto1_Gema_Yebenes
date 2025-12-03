@@ -1,4 +1,12 @@
 import time
+from rich import print
+from rich.panel import Panel
+from rich.table import Table
+from rich.console import Console
+
+
+
+console = Console()
 
 def calculate_fare(seconds_stopped, seconds_moving):
     """
@@ -7,16 +15,23 @@ def calculate_fare(seconds_stopped, seconds_moving):
     - Moving: 0.05 €/s
     """
     fare = seconds_stopped * 0.02 + seconds_moving * 0.05
-    print(f"Este es el total: {fare}")
+    # print(f"Este es el total: {fare}")
+    print(f":euro: [bold green]Total so far: €{fare:.2f}[/bold green]")
+
     return fare
 
 def taximeter():
     """
     Función para manejar y mostrar las opciones del taxímetro.
     """
-    print("Welcome to the F5 Taximeter!")
-    print("Available commands: 'start', 'stop', 'move', 'finish', 'exit'\n")
-
+    print(Panel("Welcome to the F5 TAXIMETER", title="🚕 TAXIMETER", border_style="yellow"))
+    # print("Available commands: 'start', 'stop', 'move', 'finish', 'exit'\n")
+    print("[bold cyan]Commands:[/bold cyan]")
+    print(":play_button: [green]start[/green]")
+    print(":pause_button: [blue]stop[/blue]")
+    print(":taxi: [yellow]move[/yellow]")
+    print(":check_mark: [green]finish[/green]")
+    print(":cross_mark: [red]exit[/red]\n")
     trip_active = False
     start_time = 0
     stopped_time = 0
@@ -29,7 +44,7 @@ def taximeter():
 
         if command == "start":
             if trip_active:
-                print("Error: A trip is already in progress.")
+                print("warning: [bold red] Trip is already in progress! [bold red]")
                 continue
             trip_active = True
             start_time = time.time()
@@ -37,11 +52,13 @@ def taximeter():
             moving_time = 0
             state = 'stopped'  # Iniciamos en estado 'stopped'
             state_start_time = time.time()
-            print("Trip started. Initial state: 'stopped'.")
+            print(":play_button: [bold green]Trip started![/bold green]")
+            print(":pause_button: [cyan]Initial state: STOPPED[/cyan]")
+
 
         elif command in ("stop", "move"):
             if not trip_active:
-                print("Error: No active trip. Please start first.")
+                print(":x: [bold red]No active trip. Use START first![/bold red]")
                 continue
             # Calcula el tiempo del estado anterior
             duration = time.time() - state_start_time
@@ -53,11 +70,15 @@ def taximeter():
             # Cambia el estado
             state = 'stopped' if command == "stop" else 'moving'
             state_start_time = time.time()
-            print(f"State changed to '{state}'.")
+            # print(f"State changed to '{state}'.")
+            if state == "moving":
+              print(":taxi: [yellow]Taxi is MOVING[/yellow]")
+            else:
+              print(":pause_button: [cyan]Taxi is STOPPED[/cyan]")
 
         elif command == "finish":
             if not trip_active:
-                print("Error: No active trip to finish.")
+                print(":warning: [bold red]No trip to finish[/bold red]")
                 continue
             # Agrega tiempo del último estado
             duration = time.time() - state_start_time
@@ -68,11 +89,24 @@ def taximeter():
 
             # Calcula la tarifa total y muestra el resumen del viaje
             total_fare = calculate_fare(stopped_time, moving_time)
-            print(f"\n--- Trip Summary ---")
-            print(f"Stopped time: {stopped_time:.1f} seconds")
-            print(f"Moving time: {moving_time:.1f} seconds")
-            print(f"Total fare: €{total_fare:.2f}")
-            print("---------------------\n")
+            # print(f"\n--- Trip Summary ---")
+            # print(f"Stopped time: {stopped_time:.1f} seconds")
+            # print(f"Moving time: {moving_time:.1f} seconds")
+            # print(f"Total fare: €{total_fare:.2f}")
+            # print("---------------------\n")
+            table = Table(title="🚕 Trip Summary", show_header=True, header_style="bold magenta")
+            table.add_column("State", style="cyan")
+            table.add_column("Time (seconds)", justify="right")
+            table.add_column("Cost (€)", justify="right", style="green")
+            
+            table.add_row("Stopped", f"{stopped_time:.1f}", f"{stopped_time * 0.02:.2f}")
+            table.add_row("Moving", f"{moving_time:.1f}", f"{moving_time * 0.05:.2f}")
+            table.add_row("TOTAL", "", f"{total_fare:.2f}")
+
+            console.print(table)
+
+            print(":check_mark: [bold green]Trip finished successfully![/bold green]\n")
+
 
             # Reset las variables para el próximo viaje
             trip_active = False
@@ -83,7 +117,8 @@ def taximeter():
             break
 
         else:
-            print("Unknown command. Use: start, stop, move, finish, or exit.")
+            print(":question: [yellow]Unknown command[/yellow] → use start, stop, move, finish or exit.")
+
 
 if __name__ == "__main__":
     taximeter()
