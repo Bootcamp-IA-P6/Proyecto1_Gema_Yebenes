@@ -1,0 +1,14 @@
+{
+  "normal": {
+    "stopped": 0.02,
+    "moving": 0.05
+  },
+  "high_demand": {
+    "stopped": 0.04,
+    "moving": 0.08
+  },
+  "night": {
+    "stopped": 0.03,
+    "moving": 0.06
+  }
+}
