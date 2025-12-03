@@ -1,0 +1,20 @@
+2025-12-03 12:04:01,988 - INFO - Taximeter program started
+2025-12-03 12:04:14,450 - INFO - State changed from stopped to moving (duration of previous state: 3.5 seconds)
+2025-12-03 12:04:17,204 - INFO - State changed from moving to stopped (duration of previous state: 2.8 seconds)
+2025-12-03 12:04:23,557 - INFO - State changed from stopped to moving (duration of previous state: 6.4 seconds)
+2025-12-03 12:04:33,286 - INFO - State changed from moving to stopped (duration of previous state: 9.7 seconds)
+2025-12-03 12:04:40,561 - INFO - Trip finished. Stopped: 17.1s, Moving: 12.5s, Total fare: €0.97
+2025-12-03 12:04:44,154 - INFO - User exited the program
+2025-12-03 12:05:15,145 - INFO - Taximeter program started
+2025-12-03 12:05:21,235 - WARNING - Command 'move' used without active trip
+2025-12-03 12:05:41,355 - INFO - State changed from stopped to moving (duration of previous state: 12.1 seconds)
+2025-12-03 12:05:45,595 - INFO - State changed from moving to moving (duration of previous state: 4.2 seconds)
+2025-12-03 12:05:48,838 - INFO - State changed from moving to stopped (duration of previous state: 3.2 seconds)
+2025-12-03 12:05:56,832 - WARNING - User tried to start a trip, but a trip is already active
+2025-12-03 12:06:05,075 - INFO - State changed from stopped to stopped (duration of previous state: 16.2 seconds)
+2025-12-03 12:06:11,581 - INFO - State changed from stopped to moving (duration of previous state: 6.5 seconds)
+2025-12-03 12:06:15,380 - INFO - State changed from moving to stopped (duration of previous state: 3.8 seconds)
+2025-12-03 12:06:22,109 - INFO - Trip finished. Stopped: 41.6s, Moving: 11.3s, Total fare: €1.40
+2025-12-03 12:06:42,659 - INFO - State changed from stopped to moving (duration of previous state: 16.3 seconds)
+2025-12-03 12:06:45,510 - INFO - State changed from moving to stopped (duration of previous state: 2.9 seconds)
+2025-12-03 12:06:50,996 - INFO - User exited the program
