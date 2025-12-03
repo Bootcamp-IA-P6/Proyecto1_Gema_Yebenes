@@ -1,12 +1,20 @@
 import time
+import logging
 from rich import print
 from rich.panel import Panel
 from rich.table import Table
 from rich.console import Console
 
 
-
 console = Console()
+
+# Configuración básica de logging
+logging.basicConfig (
+    level= logging.INFO, #esto es el nivel minimo que se registrara (INFO.WARNING,ERRORES ...)
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    filename= "logs/taximeter.log",
+    filemode="a",
+)
 
 def calculate_fare(seconds_stopped, seconds_moving):
     """
@@ -24,8 +32,9 @@ def taximeter():
     """
     Función para manejar y mostrar las opciones del taxímetro.
     """
+    logging.info("Taximeter program started")
+    
     print(Panel("Welcome to the F5 TAXIMETER", title="🚕 TAXIMETER", border_style="yellow"))
-    # print("Available commands: 'start', 'stop', 'move', 'finish', 'exit'\n")
     print("[bold cyan]Commands:[/bold cyan]")
     print(":play_button: [green]start[/green]")
     print(":pause_button: [blue]stop[/blue]")
@@ -45,6 +54,7 @@ def taximeter():
         if command == "start":
             if trip_active:
                 print("warning: [bold red] Trip is already in progress! [bold red]")
+                logging.warning("User tried to start a trip, but a trip is already active")
                 continue
             trip_active = True
             start_time = time.time()
@@ -59,6 +69,7 @@ def taximeter():
         elif command in ("stop", "move"):
             if not trip_active:
                 print(":x: [bold red]No active trip. Use START first![/bold red]")
+                logging.warning(f"Command '{command}' used without active trip")
                 continue
             # Calcula el tiempo del estado anterior
             duration = time.time() - state_start_time
@@ -68,9 +79,12 @@ def taximeter():
                 moving_time += duration
 
             # Cambia el estado
+            previous_state = state
             state = 'stopped' if command == "stop" else 'moving'
             state_start_time = time.time()
-            # print(f"State changed to '{state}'.")
+            
+            logging.info(f"State changed from {previous_state} to {state} (duration of previous state: {duration:.1f} seconds)")
+            
             if state == "moving":
               print(":taxi: [yellow]Taxi is MOVING[/yellow]")
             else:
@@ -79,6 +93,7 @@ def taximeter():
         elif command == "finish":
             if not trip_active:
                 print(":warning: [bold red]No trip to finish[/bold red]")
+                logging.warning("User tried to finish a trip, but no active trip")
                 continue
             # Agrega tiempo del último estado
             duration = time.time() - state_start_time
@@ -89,11 +104,9 @@ def taximeter():
 
             # Calcula la tarifa total y muestra el resumen del viaje
             total_fare = calculate_fare(stopped_time, moving_time)
-            # print(f"\n--- Trip Summary ---")
-            # print(f"Stopped time: {stopped_time:.1f} seconds")
-            # print(f"Moving time: {moving_time:.1f} seconds")
-            # print(f"Total fare: €{total_fare:.2f}")
-            # print("---------------------\n")
+            logging.info(
+             f"Trip finished. Stopped: {stopped_time:.1f}s, Moving: {moving_time:.1f}s, Total fare: €{total_fare:.2f}" )
+
             table = Table(title="🚕 Trip Summary", show_header=True, header_style="bold magenta")
             table.add_column("State", style="cyan")
             table.add_column("Time (seconds)", justify="right")
@@ -113,11 +126,13 @@ def taximeter():
             state = None
 
         elif command == "exit":
+            logging.info("User exited the program")
             print("Exiting the program. Goodbye!")
             break
 
         else:
             print(":question: [yellow]Unknown command[/yellow] → use start, stop, move, finish or exit.")
+            logging.warning(f"Unknown command received: '{command}'")
 
 
 if __name__ == "__main__":
