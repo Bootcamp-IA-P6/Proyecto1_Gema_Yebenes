@@ -1,0 +1,3 @@
+2025-12-03 14:51:23 | stopped=17.5s  | moving= 20.7s | total= 1.38
+ | 2025-12-03 14:53:45 | stopped=16.8s  | moving= 19.2s | total= 1.30
+ | 

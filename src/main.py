@@ -1,5 +1,7 @@
 import time
 import logging
+import os
+from datetime import datetime
 from rich import print
 from rich.panel import Panel
 from rich.table import Table
@@ -7,6 +9,7 @@ from rich.console import Console
 
 
 console = Console()
+TRIPS_HISTORY_FILE = os.path.join("data", "trips_history.txt")
 
 # Configuración básica de logging
 logging.basicConfig (
@@ -27,6 +30,24 @@ def calculate_fare(seconds_stopped, seconds_moving):
     print(f":euro: [bold green]Total so far: €{fare:.2f}[/bold green]")
 
     return fare
+
+def save_trip_hstory(stopped_time, moving_time, total_fare ):
+    """
+    Guarda un registro del viaje en un archivo de texto plano.
+    Cada línea representa un viaje.
+    """
+    timestamp =datetime.now().strftime("%Y-%m-%d %H:%M:%S")#fecha y hora con texto bonito
+    
+    line = (
+        f"{timestamp} | "
+        f"stopped={stopped_time:.1f}s  | "
+        f"moving={moving_time: .1f}s | " 
+        f"total={total_fare: .2f}\n | "
+        
+    )
+    
+    with open(TRIPS_HISTORY_FILE, "a", encoding="utf-8") as f:
+        f.write(line)
 
 def taximeter():
     """
@@ -106,6 +127,8 @@ def taximeter():
             total_fare = calculate_fare(stopped_time, moving_time)
             logging.info(
              f"Trip finished. Stopped: {stopped_time:.1f}s, Moving: {moving_time:.1f}s, Total fare: €{total_fare:.2f}" )
+            #guardamos el viaje en el historico llamamos a la funcion que hemos echo antes
+            save_trip_hstory(stopped_time, moving_time,total_fare)
 
             table = Table(title="🚕 Trip Summary", show_header=True, header_style="bold magenta")
             table.add_column("State", style="cyan")
