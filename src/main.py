@@ -3,10 +3,10 @@ from rich import print
 from rich.panel import Panel
 from rich.table import Table
 from rich.console import Console
+
+
+
 console = Console()
-
-
-
 
 def calculate_fare(seconds_stopped, seconds_moving):
     """
