@@ -6,7 +6,7 @@ from rich import print
 from rich.panel import Panel
 from rich.table import Table
 from rich.console import Console
-
+from pricing import load_prices # funcion del archivo princing para elegir tarifa
 
 console = Console()
 TRIPS_HISTORY_FILE = os.path.join("data", "trips_history.txt")
@@ -19,13 +19,22 @@ logging.basicConfig (
     filemode="a",
 )
 
-def calculate_fare(seconds_stopped, seconds_moving):
+def calculate_fare(seconds_stopped, seconds_moving, prices):
     """
-    Calcular la tarifa total en euros.
+    Calcular la tarifa total en euros, segun los precios que hay en mi json
+    nornal
     - Stopped: 0.02 €/s
     - Moving: 0.05 €/s
+    night
+      - Stopped: 0.03 €/s
+     - Moving: 0.06 €/s . etc
     """
-    fare = seconds_stopped * 0.02 + seconds_moving * 0.05
+    #declaro dos variables
+    stopped_price = prices["stopped"]
+    moving_price = prices["moving"]
+    
+    fare = seconds_stopped * stopped_price + seconds_moving * moving_price
+    
     # print(f"Este es el total: {fare}")
     print(f":euro: [bold green]Total so far: €{fare:.2f}[/bold green]")
 
@@ -55,6 +64,8 @@ def taximeter():
     """
     logging.info("Taximeter program started")
     
+    prices = load_prices()
+    
     print(Panel("Welcome to the F5 TAXIMETER", title="🚕 TAXIMETER", border_style="yellow"))
     print("[bold cyan]Commands:[/bold cyan]")
     print(":play_button: [green]start[/green]")
@@ -62,6 +73,9 @@ def taximeter():
     print(":taxi: [yellow]move[/yellow]")
     print(":check_mark: [green]finish[/green]")
     print(":cross_mark: [red]exit[/red]\n")
+    
+   
+    
     trip_active = False
     start_time = 0
     stopped_time = 0
@@ -124,7 +138,7 @@ def taximeter():
                 moving_time += duration
 
             # Calcula la tarifa total y muestra el resumen del viaje
-            total_fare = calculate_fare(stopped_time, moving_time)
+            total_fare = calculate_fare(stopped_time, moving_time, prices)
             logging.info(
              f"Trip finished. Stopped: {stopped_time:.1f}s, Moving: {moving_time:.1f}s, Total fare: €{total_fare:.2f}" )
             #guardamos el viaje en el historico llamamos a la funcion que hemos echo antes
@@ -135,8 +149,8 @@ def taximeter():
             table.add_column("Time (seconds)", justify="right")
             table.add_column("Cost (€)", justify="right", style="green")
             
-            table.add_row("Stopped", f"{stopped_time:.1f}", f"{stopped_time * 0.02:.2f}")
-            table.add_row("Moving", f"{moving_time:.1f}", f"{moving_time * 0.05:.2f}")
+            table.add_row("Stopped", f"{stopped_time:.1f}", f"{stopped_time * prices["stopped"]:.2f}")
+            table.add_row("Moving", f"{moving_time:.1f}", f"{moving_time * prices["moving"]:.2f}")
             table.add_row("TOTAL", "", f"{total_fare:.2f}")
 
             console.print(table)
