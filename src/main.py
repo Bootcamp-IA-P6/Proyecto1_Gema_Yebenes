@@ -1,14 +1,15 @@
 import time
-import logging
+import logging # para los logs
 import os
-from datetime import datetime
-from rich import print
-from rich.panel import Panel
-from rich.table import Table
-from rich.console import Console
+from datetime import datetime 
+from rich import print  # Para imprimir con colores y estilos
+from rich.panel import Panel # Para mostrar cuadros bonitos
+from rich.table import Table # Para mostrar tablas
+from rich.console import Console # Consola Rich para imprimir tablas
 from pricing import load_prices # funcion del archivo princing para elegir tarifa
 
-console = Console()
+console = Console() # esto es una consola rich para dibujar tablas
+
 TRIPS_HISTORY_FILE = os.path.join("data", "trips_history.txt")
 
 # Configuración básica de logging
