@@ -35,7 +35,8 @@ root = tk.Tk()
 #si se ponen los titulos
 root.title("🚕 Taxímetro - GUI")
 # tamaño inicial de la ventana
-root.geometry("400x400")
+root.geometry("450x550")
+
 
 #VARIABLES GLOBALES DE TKINTER
 #selected_mode guardará el modo elegido en los Radiobuttons (normal, night, etc.)
@@ -149,7 +150,12 @@ def finish_trip():
         
     
 #  SELECTOR DE TARIFA (RADIObuttons)
-frame_mode= tk.LabelFrame(root, text="Elige Tarifa", padx=10, pady=10)
+frame_mode= tk.LabelFrame(
+    root,
+    text="Elige Tarifa",
+    padx=50,     # espacio interno horizontal
+    pady=40,     # espacio interno vertical
+    font=("Arial", 20, "bold"))
 frame_mode.pack(pady=10)
     
     # Creamos un radiobutton por cada modo de tarifa del JSON
@@ -158,20 +164,60 @@ for mode in all_prices:
             frame_mode,
             text=mode, # lo que se ve (normal, night, high_demand)
             variable=selected_mode, # variable compartida declarada arriba
-            value=mode  # valor que toma selected_mode cuando se selecciona este botón
+            value=mode,  # valor que toma selected_mode cuando se selecciona este botón
+            font=("Arial", 20),
+            padx=10,
+            pady=4,
         ).pack(anchor="w")
         
         #Botón para confirmar la tarifa elegida
-btn_select= tk.Button(root, text="Confirmar Tarifa", command=select_pricing_mode)
+btn_select= tk.Button(
+    root, 
+    text="Confirmar Tarifa",
+    width=20,
+    height=2,
+    font=("Arial", 15 , "bold" ),  
+    command=select_pricing_mode,
+    )
 btn_select.pack(pady=5)
         
        
-btn_start = tk.Button(root, text="START", width=15, command=start_trip,bg="green", state=tk.DISABLED)
+btn_start = tk.Button(
+    root, 
+    text="START", 
+    width=20,
+    height=2,
+    font=("Arial", 15 , "bold" ), 
+    command=start_trip,
+    bg="green", 
+    fg="white",
+    state=tk.DISABLED)
 btn_start.pack(pady=5)
-btn_move = tk.Button(root, text="MOVE", width=15, command=move_trip, bg="yellow", state=tk.DISABLED)
+
+btn_move = tk.Button(
+    root, 
+    text="MOVE", 
+    width=20,
+    height=2,
+    font=("Arial", 15 , "bold" ), 
+    command=move_trip, 
+    bg="yellow", 
+    fg="white",
+    state=tk.DISABLED)
 btn_move.pack(pady=5)
-btn_stop = tk.Button(root, text="STOP", width=15, command=stop_trip, bg="red", state=tk.DISABLED)
+
+btn_stop = tk.Button(
+    root, 
+    text="STOP", 
+    width=20,
+    height=2,
+    font=("Arial", 15 , "bold" ), 
+    command=stop_trip, 
+    bg="red", 
+    fg="white",
+    state=tk.DISABLED)
 btn_stop.pack(pady=5)
+
 btn_finish = tk.Button(root, text="FINISH", width=15, command=finish_trip, bg="lightblue", state=tk.DISABLED)
 btn_finish.pack(pady=5)
     
