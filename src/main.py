@@ -151,9 +151,9 @@ def taximeter():
             table.add_column("Time (seconds)", justify="right")
             table.add_column("Cost (€)", justify="right", style="green")
             
-            table.add_row("Stopped", f"{stopped_time:.1f}", f"{stopped_time * prices["stopped"]:.2f}")
-            table.add_row("Moving", f"{moving_time:.1f}", f"{moving_time * prices["moving"]:.2f}")
-            table.add_row("TOTAL", "", f"{total_fare:.2f}")
+            table.add_row("Stopped", f'{stopped_time:.1f}", f"{stopped_time * prices["stopped"]:.2f}')
+            table.add_row("Moving", f'{moving_time:.1f}", f"{moving_time * prices["moving"]:.2f}')
+            table.add_row("TOTAL", "", f'{total_fare:.2f}')
 
             console.print(table)
 
