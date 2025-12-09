@@ -180,10 +180,13 @@ btn_select= tk.Button(
     command=select_pricing_mode,
     )
 btn_select.pack(pady=5)
-        
-       
+
+#esto es omo una cajita para los botones     
+buttons_frame = tk.Frame(root)
+buttons_frame.pack(pady=15)  # este pack solo se aplica al frame, no a los botones
+     
 btn_start = tk.Button(
-    root, 
+    buttons_frame, 
     text="START", 
     width=20,
     height=2,
@@ -192,10 +195,10 @@ btn_start = tk.Button(
     bg="green", 
     fg="white",
     state=tk.DISABLED)
-btn_start.pack(pady=5)
+btn_start.grid(row=0,column=0,padx=5,pady=5)
 
 btn_move = tk.Button(
-    root, 
+    buttons_frame, 
     text="MOVE", 
     width=20,
     height=2,
@@ -204,10 +207,10 @@ btn_move = tk.Button(
     bg="yellow", 
     fg="white",
     state=tk.DISABLED)
-btn_move.pack(pady=5)
+btn_move.grid(row=0,column=1,padx=5,pady=5)
 
 btn_stop = tk.Button(
-    root, 
+    buttons_frame, 
     text="STOP", 
     width=20,
     height=2,
@@ -216,10 +219,19 @@ btn_stop = tk.Button(
     bg="red", 
     fg="white",
     state=tk.DISABLED)
-btn_stop.pack(pady=5)
+btn_stop.grid(row=0,column=2,padx=5,pady=5)
 
-btn_finish = tk.Button(root, text="FINISH", width=15, command=finish_trip, bg="lightblue", state=tk.DISABLED)
-btn_finish.pack(pady=5)
+btn_finish = tk.Button(
+    buttons_frame, 
+    text="FINISH", 
+    width=20,
+    height=2,
+    font=("Arial", 15 , "bold" ), 
+    command=finish_trip, 
+    bg="lightblue", 
+    fg="white",
+    state=tk.DISABLED)
+btn_finish.grid(row=0,column=3,padx=5,pady=5)
     
 
 
