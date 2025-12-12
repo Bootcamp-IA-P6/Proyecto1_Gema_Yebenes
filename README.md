@@ -96,7 +96,7 @@ taximetro-f5/
 ```bash
 # 1. Clonar el repositorio
 git clone https://github.com/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes.git
-cd taximetro
+cd Proyecto1_Gema_Yebenes
 
 # 2. Crear entorno virtual (recomendado)
 python -m venv venv
@@ -117,10 +117,10 @@ pip install -r requirements.txt
 ```bash
 # Clonar repositorio
 git clone https://github.com/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes.git
-cd taximetro
+cd Proyecto1_Gema_Yebenes
 
 # Construir y ejecutar con Docker Compose
-docker-compose up --build
+docker compose up
 
 # La aplicación estará disponible en: http://localhost:8501
 ```
@@ -206,7 +206,7 @@ streamlit run src/app.py
 #### Con Docker:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 Accede a: **http://localhost:8501**
@@ -353,16 +353,16 @@ docker run -p 8501:8501 taximetro-app
 
 ```bash
 # Iniciar servicios
-docker-compose up
+docker compose up
 
 # Modo detached (segundo plano)
-docker-compose up -d
+docker compose up -d
 
 # Ver logs
-docker-compose logs -f
+docker compose logs -f
 
 # Detener servicios
-docker-compose down
+docker compose down
 ```
 
 ### Características del Contenedor:
@@ -482,6 +482,7 @@ Este proyecto es con fines educativos y no tiene licencia comercial.
 ---
 
 ## 📸 Screenshots
+![Interfaz Web](docs/streamlit.png)
 
 ### CLI Interface
 ```
@@ -505,8 +506,8 @@ Commands:
 
 **⭐ Si este proyecto te resulta útil, ¡dale una estrella en GitHub! ⭐**
 
-[![GitHub stars](https://img.shields.io/github/stars/tu-usuario/taximetro-f5?style=social)](https://github.com/tu-usuario/taximetro-f5/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/tu-usuario/taximetro-f5?style=social)](https://github.com/tu-usuario/taximetro-f5/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes?style=social)](https://github.com/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes?style=social)](https://github.com/Bootcamp-IA-P6/Proyecto1_Gema_Yebenes/network/members)
 
 Hecho con ❤️ y ☕ durante el Bootcamp de IA
 
