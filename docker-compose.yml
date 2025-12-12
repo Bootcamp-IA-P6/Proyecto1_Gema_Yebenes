@@ -1,0 +1,22 @@
+version: '3.8'  
+
+services:       
+  mi-taxi:      
+    
+      # Construye la imagen Le dice: "Usa el Dockerfile que hay en esta carpeta (.)"
+    build: .    
+    image: taximetro-app #asi quiero que se llame mi imagen cuando la construya
+    
+    # Nombre que tendrá el contenedor puedo poner lo que quiera
+    container_name: taxi-dev
+    
+    # PUERTOS: "Puerto de mi PC : Puerto del contenedor"
+    ports:
+      - "8501:8501"
+    
+    
+    volumes:
+      - ./src:/app/src
+      - ./config_prices.json:/app/config_prices.json
+      
+    command: streamlit run src/app.py --server.port=8501 --server.address=0.0.0.0

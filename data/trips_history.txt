@@ -1,0 +1,11 @@
+2025-12-03 14:51:23 | stopped=17.5s  | moving= 20.7s | total= 1.38
+ | 2025-12-03 14:53:45 | stopped=16.8s  | moving= 19.2s | total= 1.30
+ | 2025-12-04 09:10:41 | stopped=9.3s  | moving= 4.7s | total= 0.42
+ | 2025-12-04 11:57:03 | stopped=15.2s  | moving= 8.9s | total= 0.75
+ | 2025-12-04 11:58:42 | stopped=13.7s  | moving= 8.1s | total= 0.68
+ | 2025-12-04 12:01:19 | stopped=20.1s  | moving= 6.8s | total= 0.74
+ | 2025-12-04 12:06:08 | stopped=13.6s  | moving= 7.2s | total= 0.63
+ | 2025-12-04 12:07:11 | stopped=32.5s  | moving= 18.2s | total= 1.56
+ | 2025-12-04 12:28:37 | stopped=11.6s  | moving= 7.9s | total= 0.82
+ | 2025-12-04 12:42:03 | stopped=33.2s  | moving= 16.0s | total= 1.96
+ | 

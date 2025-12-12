@@ -17,3 +17,9 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+# otros archivos
+.env
+logs/
+
+
