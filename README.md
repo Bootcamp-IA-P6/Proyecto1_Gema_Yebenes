@@ -482,7 +482,7 @@ Este proyecto es con fines educativos y no tiene licencia comercial.
 ---
 
 ## 📸 Screenshots
-![Interfaz Web](docs/streamlit.png)
+![Interfaz Web](docs/streamlit1.png)
 
 ### CLI Interface
 ```

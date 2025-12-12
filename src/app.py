@@ -49,6 +49,7 @@ st.set_page_config(
     page_icon="🚖",                     # Icono en la pestaña
     layout="centered"                   # "centered" centra todo en una columna bonita (antes ocupaba todo el ancho y se veía desparramado)
 )
+LOGO_PATH = "src/assets/logo_taxi3.png"
 
 def load_all_prices():
     """
@@ -101,8 +102,14 @@ with st.sidebar:
         
         # 'toast' saca un mensajito flotante temporal en la esquina
         st.toast(f"¡Tarifa {selected_mode} cargada!", icon="🚕")
+        
+#Creamos columnas para centrar la imagen
+#El '3' y '1' son proporciones. Las columnas 1 y 3 tendrán 1 partes de espacio,
+# y la columna 2 tendrá 3 parte donde se centra el contenido.
+col1, col2, col3 = st.columns([1, 3, 1])
 # Título principal
-st.title("🚖 Taxímetro F5")
+with col2:
+    st.image(LOGO_PATH, width=300)
 # Mostramos el estado actual en texto pequeño (Markdown)
 st.markdown(f"**Estado actual:** `{st.session_state.status}`")
 
