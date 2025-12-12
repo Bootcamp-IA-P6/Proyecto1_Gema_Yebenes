@@ -71,7 +71,6 @@ if "taximeter" not in st.session_state:
         st.session_state.is_running = False # hay un viaje en marcha empieza en False
         st.session_state.status = "Sin Iniciar" # Texto del estado actual
         st.session_state.ticket_html = None # memoria para el tikect
-# BARRA LATERAL (SIDEBAR) - CAMBIO IMPORTANTE
 # El selector de tarifa a la izquierda (sidebar).
 with st.sidebar:
     st.header("Elige Tarifa")
@@ -89,9 +88,9 @@ with st.sidebar:
         st.table(all_prices[selected_mode])
     
     # --- Botón de Cargar ---
-    # 'use_container_width=True' hace que el botón ocupe todo el ancho (queda pro).
+    # 'use_container_width=True' hace que el botón ocupe todo el ancho.
     if st.button("🔄 Cargar Tarifa", use_container_width=True):
-        # Tu lógica original: creamos el objeto con los precios elegidos
+        # creamos el objeto con los precios elegidos
         selected_prices = all_prices[selected_mode]
         st.session_state.taximeter = Taximeter(selected_prices)
         st.session_state.mode = selected_mode
@@ -110,7 +109,6 @@ st.markdown(f"**Estado actual:** `{st.session_state.status}`")
 st.divider() # Una línea gris elegante para separar
 
 # --- LÓGICA DE VISUALIZACIÓN EN TIEMPO REAL ---
-# Esto es un truco. 
 # Los segundos correr en pantalla.
 # Así que calculamos el tiempo "extra" que ha pasado desde el último cambio de estado.
 # Muestra el estado actual
